@@ -1,0 +1,6 @@
+spring:
+  application.name: cargo-reporting-service
+
+logging:
+  file:
+    path: C:\\Users\\p.bohomaz\\IdeaProjects\\cargo-reporting-service
