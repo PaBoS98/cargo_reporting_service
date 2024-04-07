@@ -18,6 +18,4 @@ ENV CARGO_TRACKING_URL=${CARGO_TRACKING_URL}
 
 WORKDIR /app/cargo_reporting_service
 COPY --from=build /app/cargo_reporting_service/target/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar", "--server.port=${PORT}",
-            "--kafka.server=${KAFKA_URL}:${KAFKA_PORT}",
-            "--cargo.tracking.service.url=${CARGO_TRACKING_URL}"]
+ENTRYPOINT ["java", "-jar", "app.jar", "--server.port=${PORT}", "--kafka.server=${KAFKA_URL}:${KAFKA_PORT}", "--cargo.tracking.service.url=${CARGO_TRACKING_URL}"]
