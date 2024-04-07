@@ -129,7 +129,7 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
-					<mainClass>com.baeldung.spring.kafka.KafkaApplication</mainClass>
+					<mainClass>com.pavlob.CargoReportingServiceApplication</mainClass>
 				</configuration>
 				<executions>
 					<execution>
