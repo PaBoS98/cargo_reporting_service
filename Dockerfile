@@ -11,11 +11,11 @@ ARG KAFKA_URL="localhost"
 ARG KAFKA_PORT="9092"
 ARG CARGO_TRACKING_URL="localhost:8081"
 
-ENV PORT=${PORT}
-ENV KAFKA_URL=${KAFKA_URL}
-ENV KAFKA_PORT=${KAFKA_PORT}
-ENV CARGO_TRACKING_URL=${CARGO_TRACKING_URL}
+ENV ENV_PORT=${PORT}
+ENV ENV_KAFKA_URL=${KAFKA_URL}
+ENV ENV_KAFKA_PORT=${KAFKA_PORT}
+ENV ENV_CARGO_TRACKING_URL=${CARGO_TRACKING_URL}
 
 WORKDIR /app/cargo_reporting_service
-COPY --from=build /app/cargo_reporting_service/target/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar", "--server.port=${PORT}", "--kafka.server=${KAFKA_URL}:${KAFKA_PORT}", "--cargo.tracking.service.url=${CARGO_TRACKING_URL}"]
+COPY /target/*.jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar", "--server.port=${ENV_PORT}", "--kafka.server=${ENV_KAFKA_URL}:${ENV_KAFKA_PORT}", "--cargo.tracking.service.url=${ENV_CARGO_TRACKING_URL}"]
