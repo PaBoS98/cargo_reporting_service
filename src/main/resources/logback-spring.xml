@@ -2,8 +2,14 @@
 <configuration>
     <springProperty scope="context" name="LOG_PATH" source="logging.path"/>
 
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{ISO8601} | %-5p | %X{X-MM-CORRELATION-ID} | %t | %c | %m%n</pattern>
+        </encoder>
+    </appender>
+
     <appender name="fileAppender" class="ch.qos.logback.core.FileAppender">
-        <file>${LOG_PATH:-./logs}/log4j-logstash.log</file>
+        <file>${LOG_PATH:-./logs/}/cargo-reporting-service/log4j-logstash.log</file>
         <triggeringPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_PATH:-./logs}/log4j-logstash-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
             <maxHistory>30</maxHistory>
@@ -13,8 +19,14 @@
         </encoder>
     </appender>
 
+    <springProfile name="default">
+        <logger name="io.mondia" level="DEBUG" />
+    </springProfile>
+
     <root level="INFO">
         <appender-ref ref="fileAppender" />
+        <springProfile name="default">
+            <appender-ref ref="CONSOLE" />
+        </springProfile>
     </root>
-
 </configuration>
